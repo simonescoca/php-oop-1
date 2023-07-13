@@ -20,98 +20,40 @@
 ?>
 
 <?php
-    class Movie {
-        public string $og_title;
-        public string $director;
-        public string $og_language;
-        public int $release_year;
-        public array $genre;
-        public int $runtime_min;
-        public array $actors;
-        public string $plot;
-        public string $poster;
-        public float $rating;
-        public static string $aspect_ratio = "16:9";
-    
-        function __construct
-        (
-            string $og_title,
-            string $director,
-            string $og_language,
-            int $release_year,
-            array $genre,
-            int $runtime_min,
-            array $actors,
-            string $plot,
-            string $poster,
-            float $rating
-        )
-        {
-            $this->og_title = $og_title;
-            $this->director = $director;
-            $this->og_language = $og_language;
-            $this->release_year = $release_year;
-            $this->genre = $genre;
-            $this->runtime_min = $runtime_min;
-            $this->actors = $actors;
-            $this->plot = $plot;
-            $this->poster = $poster;
-            $this->rating = $rating;
-
-        }
-    
-        public function getMovieLength() {
-            if ($this->runtime_min >= 120) {
-                return "Long runtime";
-            } elseif ($this->runtime_min > 90 && $this->runtime_min < 120) {
-                return "Medium runtime";
-            } else {
-                return "Short runtime";
-            }
-        }
-    }
+    require_once "./database/data.php";
 ?>
 
-<?php
-    $the_dark_knight = new Movie
-    (
-        "Batman: The Dark Knight",
-        "Christopher Nolan",
-        "EN",
-        2008,
-        ["Action", "Noir", "Superheroes", "Thriller", "Dramatic"],
-        152,
-        ["Christian Bale", "Heath Ledger", "Gary Oldman", "Aaron Eckhart", "Morgan Freeman", "Michael Caine", "Maggie GyllenHall", "Cillian Murphy"],
-        "Batman and Jim Gordon team up with Gotham City's new district attorney, Harvey Dent, to fight organized crime that is rampant in the city and stop a dangerous robber, the Joker, who has thrown the city into anarchy.",
-        "https://wallpapercave.com/wp/wp383267.jpg",
-        4.65
-    );
-
-    $the_last_samurai = new Movie
-    (
-        "The Last Samurai",
-        "Edward Zwick",
-        "EN",
-        2003,
-        ["Action", "War", "History", "Dramatic"],
-        154,
-        ["Tom Cruise", "Ken Watanabe", "Hiroyuki Sanada", "Koyuki Katō", "Tony Goldwyn", "Shin Koyamada", "Timothy Spall", "Billy Connolly"],
-        "Emperor Meiji recruits an American commander, Nathan Algren, to train his troops in the use of firearms. In battle, Algren is captured and spared by the enemy, who will instruct him in their customs and code of honor.",
-        "https://images.alphacoders.com/309/thumb-1920-309473.jpg",
-        4.2
-    );
-
-    $cars = new Movie
-    (
-        "Cars",
-        "John Lasseter",
-        "EN",
-        2006,
-        ["Animation", "Adventure", "Comedy"],
-        116,
-        ["Owen Wilson", "Larry the Cable Guy", "Paul Newman"],
-        "Lightning McQueen, a hotshot rookie race car, gets waylaid in Radiator Springs, a forgotten town on Route 66. There, he finds the true meaning of friendship and family.",
-        "https://wallpaperaccess.com/full/470176.jpg",
-        4.4
-    );
-?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./styles/style.css">
+        <title>php-oop</title>
+    </head>
+    <body>
+        <header class="py-5">
+            <div class="d-flex justify-content-center container">
+                <h1>
+                    Movies
+                </h1>
+            </div>
+        </header>
+        <main>
+            <div class="d-flex flex-column align-items-center container my_cards-container">
+                <?php
+                    foreach ($movies as $movie) {
+                ?>
+                        <div class="my_card">
+                            <div class="my_img-container">
+                                <img src="<?php echo $movie->poster; ?>" alt="<?php echo $movie->og_title; ?>">
+                            </div>
+                        </div>
+                <?php
+                    }
+                ?>
+            </div>
+        </main>
+    </body>
+</html>
